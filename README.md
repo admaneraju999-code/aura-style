@@ -5,6 +5,10 @@ Node.js serverless API that runs on **Vercel** with a **Postgres** database.
 
 No authentication — the app is a personal wardrobe.
 
+> **Want to deploy?** Follow the step-by-step **[DEPLOYMENT.md](DEPLOYMENT.md)** —
+> it covers creating the database and importing this repo to Vercel.
+
+
 ---
 
 ## Features
