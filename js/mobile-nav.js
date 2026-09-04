@@ -52,6 +52,16 @@
     </div>`;
   document.body.appendChild(bar);
 
+  // ---- Scan FAB handler (wired immediately so the scan button always works) ----
+  try {
+    const fab = bar.querySelector("[data-mobile-scan]");
+    fab.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof window.openScan === "function") window.openScan();
+    });
+  } catch (err) { /* ignore */ }
+
   // ---- Slide-in drawer (opened by tapping the brand title on mobile) ----
   const overlay = document.createElement("div");
   overlay.id = "mobile-menu-overlay";
@@ -109,17 +119,13 @@
     drawer.classList.add("translate-x-full");
   }
 
-  const mobileTitle = document.querySelector("header .md\\:hidden h1, header .md\\:hidden h2");
-  if (mobileTitle) {
-    mobileTitle.classList.add("cursor-pointer");
-    mobileTitle.addEventListener("click", openDrawer);
-  }
-
-  // ---- Scan FAB handler ----
-  bar.querySelector("[data-mobile-scan]").addEventListener("click", (e) => {
-    e.preventDefault();
-    if (typeof window.openScan === "function") window.openScan();
-  });
+  try {
+    const mobileTitle = document.querySelector("header .md\\:hidden h1, header .md\\:hidden h2");
+    if (mobileTitle) {
+      mobileTitle.classList.add("cursor-pointer");
+      mobileTitle.addEventListener("click", openDrawer);
+    }
+  } catch (err) { /* optional drawer trigger unavailable */ }
 
   // ---- Keep fixed bottom bar clear of page content on mobile ----
   const style = document.createElement("style");
