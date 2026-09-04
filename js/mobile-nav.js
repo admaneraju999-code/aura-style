@@ -25,11 +25,11 @@
     { href: "index.html", icon: "logout", label: "Sign Out" },
   ];
 
-  // ---- Mobile bottom navigation bar (Wardrobe, Builder, [Scan], Discover, Settings, More) ----
+  // ---- Mobile bottom navigation bar (Wardrobe, Builder, [Scan], Discover, Settings) ----
   const navTabs = nav
     .map(
       (n) => `
-      <a href="${n.href}" class="flex flex-col items-center justify-center gap-0.5 min-w-0 ${isActive(n.key) ? "text-primary" : "text-on-surface-variant/70"}">
+      <a href="${n.href}" class="flex flex-col items-center justify-center gap-0.5 min-w-0 ${isActive(n.key) ? "text-black" : "text-on-surface-variant/70"}">
         <span class="material-symbols-outlined text-[22px] leading-none">${n.icon}</span>
         <span class="text-[10px] font-medium tracking-wide leading-tight truncate max-w-full px-0.5">${n.label}</span>
       </a>`
@@ -40,23 +40,19 @@
   bar.id = "mobile-bottom-nav";
   bar.innerHTML = `
     <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-xl border-t border-outline-variant/30 safe-bottom shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
-      <div class="relative h-[60px] max-w-lg mx-auto px-2 flex items-stretch">
+      <div class="relative h-[56px] max-w-lg mx-auto px-4 flex items-stretch">
         <nav class="flex items-stretch justify-between flex-1">
           ${navTabs}
-          <button data-mobile-more class="flex flex-col items-center justify-center gap-0.5 min-w-0 ${isMoreActive ? "text-primary" : "text-on-surface-variant/70"}" aria-label="More menu">
-            <span class="material-symbols-outlined text-[22px] leading-none">menu</span>
-            <span class="text-[10px] font-medium tracking-wide leading-tight">More</span>
-          </button>
         </nav>
         <button data-mobile-scan aria-label="Scan new item"
-          class="absolute left-1/2 -translate-x-1/2 -top-6 w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-[0_6px_20px_rgba(0,0,0,0.25)] hover:opacity-90 active:scale-95 transition-all cursor-pointer border-4 border-white dark:border-surface-container-lowest">
-          <span class="material-symbols-outlined text-[26px]">add_a_photo</span>
+          class="absolute left-1/2 -translate-x-1/2 -top-7 w-[60px] h-[60px] rounded-full bg-black text-white flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.35)] hover:opacity-90 active:scale-95 transition-all cursor-pointer border-4 border-surface-container-lowest">
+          <span class="material-symbols-outlined text-[28px]">add_a_photo</span>
         </button>
       </div>
     </div>`;
   document.body.appendChild(bar);
 
-  // ---- Slide-in drawer (opened by "More" tab) ----
+  // ---- Slide-in drawer (opened by tapping the brand title on mobile) ----
   const overlay = document.createElement("div");
   overlay.id = "mobile-menu-overlay";
   overlay.className = "md:hidden fixed inset-0 z-[70] bg-black/40 backdrop-blur-sm hidden";
@@ -112,7 +108,12 @@
     overlay.classList.add("hidden");
     drawer.classList.add("translate-x-full");
   }
-  bar.querySelector("[data-mobile-more]").addEventListener("click", openDrawer);
+
+  const mobileTitle = document.querySelector("header .md\\:hidden h1, header .md\\:hidden h2");
+  if (mobileTitle) {
+    mobileTitle.classList.add("cursor-pointer");
+    mobileTitle.addEventListener("click", openDrawer);
+  }
 
   // ---- Scan FAB handler ----
   bar.querySelector("[data-mobile-scan]").addEventListener("click", (e) => {
