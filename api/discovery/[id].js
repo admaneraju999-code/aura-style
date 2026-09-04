@@ -14,9 +14,9 @@ export default async function handler(req, res) {
 
 async function get(req, res, id) {
   try {
-    const { data } = await sql.query(`SELECT * FROM inspirations WHERE id = $1`, [id]);
-    if (!data[0]) return notFound(res, "Inspiration not found");
-    return ok(res, data[0]);
+    const { rows } = await sql.query(`SELECT * FROM inspirations WHERE id = $1`, [id]);
+    if (!rows[0]) return notFound(res, "Inspiration not found");
+    return ok(res, rows[0]);
   } catch (err) {
     return serverError(res, err.message);
   }

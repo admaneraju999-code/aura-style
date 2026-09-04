@@ -20,9 +20,9 @@ export default async function handler(req, res) {
 async function get(req, res) {
   try {
     await initDb();
-    const { data } = await sql.query(`SELECT key, value FROM settings`);
+    const { rows } = await sql.query(`SELECT key, value FROM settings`);
     const settings = { ...DEFAULTS };
-    for (const row of data) {
+    for (const row of rows) {
       settings[row.key] = coerce(row.key, row.value);
     }
     return ok(res, settings);

@@ -11,8 +11,8 @@ async function list(req, res) {
   try {
     await initDb();
     await seedInspirations();
-    const { data } = await sql.query(`SELECT * FROM inspirations ORDER BY favorite DESC, id ASC`);
-    return ok(res, data);
+    const { rows } = await sql.query(`SELECT * FROM inspirations ORDER BY favorite DESC, id ASC`);
+    return ok(res, rows);
   } catch (err) {
     return serverError(res, err.message);
   }

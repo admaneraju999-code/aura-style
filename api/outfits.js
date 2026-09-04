@@ -12,10 +12,10 @@ export default async function handler(req, res) {
 async function list(req, res) {
   try {
     await initDb();
-    const { data } = await sql.query(
+    const { rows } = await sql.query(
       `SELECT *, item_ids::text AS item_ids FROM outfits ORDER BY created_at DESC`
     );
-    return ok(res, data.map(parseOutfit));
+    return ok(res, rows.map(parseOutfit));
   } catch (err) {
     return serverError(res, err.message);
   }

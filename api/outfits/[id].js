@@ -35,11 +35,11 @@ function parseOutfit(row) {
 async function get(req, res, id) {
   try {
     await initDb();
-    const { data } = await sql.query(
+    const { rows } = await sql.query(
       `SELECT *, item_ids::text AS item_ids FROM outfits WHERE id = $1`, [id]
     );
-    if (!data[0]) return notFound(res, "Outfit not found");
-    return ok(res, parseOutfit(data[0]));
+    if (!rows[0]) return notFound(res, "Outfit not found");
+    return ok(res, parseOutfit(rows[0]));
   } catch (err) {
     return serverError(res, err.message);
   }

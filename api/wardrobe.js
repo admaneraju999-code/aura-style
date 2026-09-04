@@ -13,10 +13,10 @@ export default async function handler(req, res) {
 async function list(req, res) {
   try {
     await initDb();
-    const { data } = await sql.query(
+    const { rows } = await sql.query(
       `SELECT * FROM wardrobe ORDER BY created_at DESC`
     );
-    return ok(res, data);
+    return ok(res, rows);
   } catch (err) {
     return serverError(res, err.message);
   }
