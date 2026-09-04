@@ -62,6 +62,29 @@
     });
   } catch (err) { /* ignore */ }
 
+  // ---- Mobile top-bar About button (always visible, links straight to About) ----
+  try {
+    if (page !== "about.html") {
+      const header = document.querySelector("header");
+      const aboutBtn = document.createElement("a");
+      aboutBtn.href = "about.html";
+      aboutBtn.setAttribute("aria-label", "About");
+      aboutBtn.setAttribute("title", "About");
+      aboutBtn.classList.add(
+        "md:hidden", "flex", "items-center", "justify-center",
+        "w-9", "h-9", "rounded-full", "text-on-surface-variant",
+        "dark:text-on-primary-container", "hover:text-primary",
+        "hover:bg-surface-container-high", "transition-colors", "shrink-0"
+      );
+      aboutBtn.innerHTML = '<span class="material-symbols-outlined text-[22px]">info</span>';
+      if (header) {
+        const rightGroup = header.querySelector('.flex.items-center.gap-4, .flex.items-center.gap-6, [class*="items-center"]');
+        if (rightGroup) rightGroup.appendChild(aboutBtn);
+        else header.appendChild(aboutBtn);
+      }
+    }
+  } catch (err) { /* ignore */ }
+
   // ---- Slide-in drawer (opened by tapping the brand title on mobile) ----
   const overlay = document.createElement("div");
   overlay.id = "mobile-menu-overlay";
