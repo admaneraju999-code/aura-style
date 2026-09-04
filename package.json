@@ -1,0 +1,19 @@
+{
+  "name": "aura-style-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "dev": "node scripts/dev-server.mjs",
+    "db:init": "node scripts/setup-db.js",
+    "test": "node tests/scan.test.mjs && node tests/validation.test.mjs"
+  },
+  "dependencies": {
+    "@vercel/postgres": "^0.10.0",
+    "busboy": "^1.6.0",
+    "sharp": "^0.33.5"
+  }
+}

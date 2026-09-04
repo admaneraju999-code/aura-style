@@ -1,0 +1,302 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Aura Style - Virtual Wardrobe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#e5e2e1",
+                        "secondary-fixed-dim": "#c6c7c5",
+                        "on-secondary-fixed-variant": "#454746",
+                        "primary-container": "#1c1b1b",
+                        "surface-dim": "#d3daea",
+                        "on-surface-variant": "#444748",
+                        "background": "#f9f9ff",
+                        "on-primary-fixed": "#1c1b1b",
+                        "tertiary-container": "#25005a",
+                        "on-primary-fixed-variant": "#474746",
+                        "on-tertiary-fixed": "#25005a",
+                        "surface-container-low": "#f0f3ff",
+                        "on-primary-container": "#858383",
+                        "primary": "#000000",
+                        "surface-container": "#e7eefe",
+                        "on-background": "#151c27",
+                        "outline": "#747878",
+                        "inverse-primary": "#c8c6c5",
+                        "on-tertiary-fixed-variant": "#5a00c6",
+                        "surface-tint": "#5f5e5e",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#1a1c1b",
+                        "surface-variant": "#dce2f3",
+                        "surface-container-highest": "#dce2f3",
+                        "on-tertiary-container": "#9863ff",
+                        "secondary-container": "#e2e3e1",
+                        "secondary-fixed": "#e2e3e1",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2a313d",
+                        "on-surface": "#151c27",
+                        "inverse-on-surface": "#ebf1ff",
+                        "error": "#ba1a1a",
+                        "surface": "#f9f9ff",
+                        "outline-variant": "#c4c7c7",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#636563",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#d2bbff",
+                        "surface-container-high": "#e2e8f8",
+                        "tertiary-fixed": "#eaddff",
+                        "tertiary": "#000000",
+                        "secondary": "#5d5f5d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body { background-color: #F9F9F7; }
+        .glass-overlay {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+
+  <!-- Animations -->
+  <link rel='stylesheet' href='css/animations.css' />
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-surface-container-lowest dark:bg-primary-container shadow-sm docked left-0 h-full w-64 fixed left-0 top-0 h-full flex flex-col py-margin-desktop px-gutter z-50">
+<div class="mb-12">
+<h1 class="font-display-lg text-display-lg tracking-tighter text-primary dark:text-primary-fixed mb-2">Aura Style</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Premium Fashion AI</p>
+</div>
+<ul class="flex-grow space-y-2"><li class="">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-primary dark:text-primary-fixed font-bold border-r-2 border-primary dark:border-primary-fixed bg-surface-container-high transition-transform scale-[0.98]" href="index.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">checkroom</span>
+<span class="font-label-md text-label-md">Wardrobe</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-primary-container opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors duration-200" href="outfit-builder.html">
+<span class="material-symbols-outlined">image_arrow_up</span>
+<span class="font-label-md text-label-md">Outfit Builder</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-primary-container opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors duration-200" href="discovery.html">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-md text-label-md">Discovery</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-primary-container opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors duration-200" href="settings.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</li></ul>
+<button data-scan class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg mb-8 hover:opacity-90 transition-opacity flex items-center justify-center gap-2 cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">add_a_photo</span>
+            Scan New Item
+        </button>
+<div class="mt-auto border-t border-outline-variant/30 pt-6">
+<ul class="space-y-2">
+<li class="">
+<a class="flex items-center gap-4 px-4 py-2 rounded-lg text-on-surface-variant dark:text-on-primary-container opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors duration-200" href="help.html">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-2 rounded-lg text-on-surface-variant dark:text-on-primary-container opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors duration-200" href="index.html">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Sign Out</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-primary-container/80 backdrop-blur-xl docked top-0 w-full border-b border-outline-variant/30 flat no shadows fixed top-0 right-0 md:left-64 flex justify-between items-center px-margin-desktop py-4 z-40 md:w-[calc(100%-16rem)]">
+<div class="md:hidden">
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary dark:text-primary-fixed">Aura Style</h1>
+</div>
+<div class="hidden md:block">
+<h2 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">Virtual Wardrobe</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden sm:block">
+<input class="bg-transparent border-b border-outline-variant text-on-surface-variant font-body-md py-1 pr-8 focus:outline-none focus:border-primary placeholder-on-surface-variant/50 w-48 focus:w-64 transition-all duration-300" placeholder="Search wardrobe..." type="text">
+<span class="material-symbols-outlined absolute right-0 top-1 text-on-surface-variant/70 cursor-pointer">search</span>
+</div>
+<button data-scan class="hidden md:flex bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md hover:opacity-80 transition-opacity items-center gap-2 cursor-pointer">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                Scan New Item
+            </button>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">history</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="User Profile Photo" class="w-full h-full object-cover" data-alt="Close up professional headshot of a stylish young professional with natural lighting, soft focus background, minimalist luxury aesthetic, bright neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2bGxhTNZNzk4G0E3LoAWmDn2pSFHU6jeKSqFXdvnqPH9fuUXR8hXd-fpjKjF2tx9uS4fxPis2Io6Lj7oGEZ-8n5uyJwtx_-vQ3TYY14EXnZbsmBQNkihi7xkIs18_k-rtDLyyhgZniMOccLz71ZVSv3Fije2zCtKa5CwsNJsnl8RBjoa5HzmD2BJdyTwRD6esFKuO5pc2tki2STm7sqifW9P9vO5fumv45GPJkVjWSD5T3YIawupL">
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="md:ml-64 pt-24 md:pt-32 px-margin-mobile md:px-margin-desktop pb-24">
+<!-- Category Filter -->
+<section class="mb-12 overflow-x-auto pb-4 hide-scrollbar">
+<div class="flex gap-4 min-w-max" data-filterbar data-filter-scope="main">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all" data-filter="all" data-active="true">All</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:border-primary hover:text-primary transition-all" data-filter="tops">Tops</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:border-primary hover:text-primary transition-all" data-filter="bottoms">Bottoms</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:border-primary hover:text-primary transition-all" data-filter="outerwear">Outerwear</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:border-primary hover:text-primary transition-all" data-filter="accessories">Accessories</button>
+</div>
+</section>
+<!-- Wardrobe Grid -->
+<div id="wardrobe-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-gutter">
+<!-- Item 1 -->
+<div class="group cursor-pointer" data-category="tops">
+<div class="bg-white rounded-lg border border-outline-variant/30 overflow-hidden aspect-[3/4] relative mb-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+<img class="w-full h-full object-cover" data-alt="High fashion studio flat lay of a crisp white silk blouse on a soft ivory background, dramatic lighting, sharp focus, minimalist luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj7JZzf_UOVdVLrSuTjAoVbH4k4aaU3GeTxMrqlM2B3TaMn2WkeVoOXrFoyymzPMRrJzKt1xHnOl2ZuGuX-Jj1Z4Jr8zkUZaSt1if4AQzP1FvzcFsr7H8MQzgI3hFsywnK25dqDzjXlG-Thq6-q3ltyx7eOMwbouVylUxrkdeEjCYUgKFwS8LS6c6tdcoee9OFq_rqzgcftl1kpq_npEsQi8SfIWPDLE99mbIZjPybJdpmBAzVK763">
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary truncate">Silk Crepe Blouse</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Celine • Ivory</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group cursor-pointer" data-category="bottoms">
+<div class="bg-white rounded-lg border border-outline-variant/30 overflow-hidden aspect-[3/4] relative mb-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+<img class="w-full h-full object-cover" data-alt="High fashion studio flat lay of tailored charcoal wool trousers on a soft ivory background, dramatic lighting, sharp focus, minimalist luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwY4mp2AU_RxgIbsO75NcKGr7YsXNg6hTJAk32U3jLjF8dyRQY7IsCOIaO8bVYd0Nqni9XkMF238GR4ZWgBWjyTvOPlKxv8x_1VPXkxyZr1bo3SECEsu-z3amYGpMwWJSl606IDfGqFuy2ew8m8QxTV29A84IySjhQyuQpkJDfPakXnKaOeLsy-m0sU6qnDH9UBXdeIm3TV1abrPGpaneBV3_C332SKXcHVFCjCura5OiqoMI0qfgK">
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary truncate">Pleated Wool Trousers</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">The Row • Charcoal</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group cursor-pointer" data-category="outerwear">
+<div class="bg-white rounded-lg border border-outline-variant/30 overflow-hidden aspect-[3/4] relative mb-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+<div class="absolute top-2 right-2 z-10 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-tertiary-container tracking-wider border border-tertiary-fixed-dim/50">AI PICK</div>
+<img class="w-full h-full object-cover" data-alt="High fashion studio flat lay of a structured beige trench coat on a soft ivory background, dramatic lighting, sharp focus, minimalist luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdGsQ9SceMQetge5kh4t1nCClzHDCuHdJZynUt38dI96XoYLBKEMecYUifhjlQVNtKlpruPUISBnjgm8NKMJlcM72gdm76fhteCwpHJzcHzOxCUplhytWxbISaMt4jPahfyjVSF3cD4K7rj8RXnAZNqMAQW2ujW781kL28fJ9_yDbV3FCJJ8KO_KWU9R8UkzsiwQ8q4a09eHdVdcl_kzPjvCQiFt54pPwZOZh8g-cVCJMJAqgwCYIT">
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary truncate">Classic Gabardine Trench</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Burberry • Honey</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="group cursor-pointer" data-category="accessories">
+<div class="bg-white rounded-lg border border-outline-variant/30 overflow-hidden aspect-[3/4] relative mb-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+<img class="w-full h-full object-cover" data-alt="High fashion studio flat lay of black leather Chelsea boots on a soft ivory background, dramatic lighting, sharp focus, minimalist luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXToE5JKUE91EgZnZNKdTomuZsgFueSn_GOyNLniSZwHOBTiW93q7cI5yIwq--0JPvG2mhZWJ2BuIoJ8BkuJYNCqgnue7jAeB_OHKq6BmoYTYKi-UATqMqbGdcQCvej933DU873bpsZ_QYyj0qfD14i9Y9VzyiEtcz317VdMRD0AC_teMyO_6OZjJSHpupjRP-o2PzTjgkQyUkC5ahS1HRTnssWVtC0lx6W22b2fCjQtox2zI9OzH3">
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary truncate">Leather Chelsea Boots</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Saint Laurent • Black</p>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="group cursor-pointer" data-category="tops">
+<div class="bg-white rounded-lg border border-outline-variant/30 overflow-hidden aspect-[3/4] relative mb-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+<img class="w-full h-full object-cover" data-alt="High fashion studio flat lay of a chunky knit cream sweater on a soft ivory background, dramatic lighting, sharp focus, minimalist luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2euO-0wEG_rRL243FH1KOyehqVyXOMSiF5KIu8FnEKVQgr_JBZvR_WmTB1C-tdUHFilo99SV7axy3PukP88T1H6fsQMUYfKeH81_UNvMIs9Xe8ng-7XnfKfPiKQpMSjT5cnc7uVUM8ulSYttENC-Cuj6iOcXoFvE-jZjqh-DAp6Hbn6LpVZgQ6PaGICeL0uV2WrhjB8vAfU8lxLLhCOo-eJAdNs4t2rz0-SF_5IioOuffzIvJfmQ_">
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary truncate">Oversized Cashmere Knit</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Toteme • Cream</p>
+</div>
+</div>
+<!-- Item 6 -->
+<div class="group cursor-pointer" data-category="bottoms">
+<div class="bg-white rounded-lg border border-outline-variant/30 overflow-hidden aspect-[3/4] relative mb-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+<img class="w-full h-full object-cover" data-alt="High fashion studio flat lay of vintage light wash straight leg denim jeans on a soft ivory background, dramatic lighting, sharp focus, minimalist luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-6Ui7TVbkps-yOiO9V6jiEuQPaTb4qlbEJTrxUC1Y5Jh_5HdVMNxVCZWtJPBwJDfEuwC9170NUefogk50d6Kcy_S_OCjgSJzZuH8rZbRimHXuLAlB4SWuiatylhBWhF0CIcb6afA9VaWphBKnGarLZGdAT4LZaaSj6ItVzSrQsYRVJXTWkyNS9s1Y1XT08h85gSaAsdRsFezhfwkoD3znZROAFTYBaACQIHnhFlSMLGjJcmg3jQxB">
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary truncate">Vintage Straight Denim</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Levi's • Light Wash</p>
+</div>
+</div>
+</div>
+</main>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+
+
+  <!-- Animations -->
+  <script src='js/animations.js'></script>
+  <!-- Filtering -->
+  <script src='js/filters.js'></script>
+  <!-- Wardrobe data + Scan -->
+  <script type="module">
+    import { initWardrobe } from './js/wardrobe.js';
+    import { openScan } from './js/scan.js';
+    document.querySelectorAll('[data-scan]').forEach((el) => {
+      el.addEventListener('click', (e) => { e.preventDefault(); openScan(); });
+    });
+    initWardrobe();
+  </script>
+</body></html>

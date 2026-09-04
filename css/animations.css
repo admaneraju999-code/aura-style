@@ -1,0 +1,188 @@
+/* ============================================================
+   AURA STYLE — Global Animations
+   Apply via helper classes, or let the auto-rules animate
+   common elements (cards, buttons, images, icons) with zero
+   HTML edits. Respects prefers-reduced-motion.
+   ============================================================ */
+
+/* ---------- Keyframes ---------- */
+@keyframes fadeIn    { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInUp  { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown{ from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes zoomIn    { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+@keyframes floatY    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes floatX    { 0%,100% { transform: translateX(0); } 50% { transform: translateX(10px); } }
+@keyframes pulseGlow { 0%,100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.45); } 50% { box-shadow: 0 0 24px 6px rgba(124,58,237,0.35); } }
+@keyframes shimmer   { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes spinSlow  { to { transform: rotate(360deg); } }
+@keyframes wiggle    { 0%,100% { transform: rotate(0deg); } 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
+@keyframes heartBeat { 0%,100% { transform: scale(1); } 25% { transform: scale(1.15); } 40% { transform: scale(0.95); } 60% { transform: scale(1.15); } }
+@keyframes colorShift{ 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes dotRipple { 0% { transform: scale(0.3); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
+
+/* ---------- Helper classes ---------- */
+.anim-fade       { animation: fadeIn 0.8s ease both; }
+.anim-fade-up    { animation: fadeInUp 0.8s cubic-bezier(.22,.61,.36,1) both; }
+.anim-fade-down  { animation: fadeInDown 0.7s ease both; }
+.anim-zoom       { animation: zoomIn 0.6s cubic-bezier(.22,.61,.36,1) both; }
+.anim-float      { animation: floatY 5s ease-in-out infinite; }
+.anim-float-x    { animation: floatX 5s ease-in-out infinite; }
+.anim-glow       { animation: pulseGlow 2.4s ease-in-out infinite; }
+.anim-spin-slow  { animation: spinSlow 14s linear infinite; }
+.anim-wiggle     { animation: wiggle 1.4s ease-in-out infinite; }
+.anim-beat       { animation: heartBeat 1.6s ease-in-out infinite; }
+
+/* Shimmering text / skeleton */
+.anim-shimmer {
+  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.55) 50%, transparent 80%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* AI gradient border pulse */
+.anim-gradient {
+  background-size: 200% 200%;
+  animation: colorShift 5s ease infinite;
+}
+
+/* ---------- Entrance stagger (apply on a parent) ---------- */
+.stagger > * { opacity: 0; animation: fadeInUp 0.7s cubic-bezier(.22,.61,.36,1) both; }
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.15s; }
+.stagger > *:nth-child(3) { animation-delay: 0.25s; }
+.stagger > *:nth-child(4) { animation-delay: 0.35s; }
+.stagger > *:nth-child(5) { animation-delay: 0.45s; }
+.stagger > *:nth-child(6) { animation-delay: 0.55s; }
+.stagger > *:nth-child(7) { animation-delay: 0.65s; }
+.stagger > *:nth-child(8) { animation-delay: 0.75s; }
+.stagger > *:nth-child(9) { animation-delay: 0.85s; }
+.stagger > *:nth-child(10){ animation-delay: 0.95s; }
+
+/* ============================================================
+   AUTO-RULES — animate common elements without editing HTML
+   ============================================================ */
+
+/* Page entrance: the whole main content fades in */
+main { animation: fadeIn 0.6s ease both; }
+
+/* Cards: slide up on load */
+.group,
+[class*="rounded"] { /* hover handled below; base entrance for grid cards */
+}
+.grid > div {
+  animation: fadeInUp 0.7s cubic-bezier(.22,.61,.36,1) both;
+}
+.grid > div:nth-child(2) { animation-delay: 0.08s; }
+.grid > div:nth-child(3) { animation-delay: 0.16s; }
+.grid > div:nth-child(4) { animation-delay: 0.24s; }
+.grid > div:nth-child(5) { animation-delay: 0.32s; }
+.grid > div:nth-child(6) { animation-delay: 0.40s; }
+.grid > div:nth-child(7) { animation-delay: 0.48s; }
+.grid > div:nth-child(8) { animation-delay: 0.56s; }
+
+/* All buttons: hover lift + active press */
+button, a.btn, .btn,
+button[class*="bg-primary"],
+a[class*="rounded-full"] {
+  transition: transform 0.18s cubic-bezier(.22,.61,.36,1),
+              box-shadow 0.25s ease, opacity 0.2s ease,
+              background-color 0.2s ease, color 0.2s ease;
+}
+button:hover:not(:disabled),
+a.btn:hover,
+a[class*="rounded-full"]:hover {
+  transform: translateY(-2px);
+}
+button:active:not(:disabled) { transform: translateY(0) scale(0.96); }
+
+/* Nav links: slide icon on hover */
+.nav a, nav a, aside a, .sidebar a,
+a[class*="gap-4"] {
+  transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+}
+a[class*="gap-4"]:hover,
+nav a:hover { transform: translateX(2px); }
+
+/* Material icon hover: heart beat for favorite, wiggle for generic */
+.material-symbols-outlined { transition: transform 0.2s ease, color 0.2s ease; }
+button:hover .material-symbols-outlined,
+a:hover .material-symbols-outlined { transform: scale(1.12); }
+
+/* Images: slow zoom on hover of their card container */
+.group img,
+[class*="group"] img { transition: transform 0.6s cubic-bezier(.22,.61,.36,1); }
+.group:hover img,
+[class*="group"]:hover img { transform: scale(1.06); }
+
+/* AI / accent elements glow */
+[class*="ai-accent"], [class*="ai-"], [class*="text-ai"] { animation: pulseGlow 2.6s ease-in-out infinite; }
+
+/* Floating dot hotspots (Outfit Builder) */
+div[class*="w-3 h-3"] { animation: dotRipple 2s ease-out infinite; }
+
+/* ============================================================
+   SCROLL-REVEAL  (fade/slide elements in as you scroll)
+   Auto-applies to key content blocks; uses IntersectionObserver
+   injected once via the small script below.
+   ============================================================ */
+.js-reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.22,.61,.36,1); }
+.js-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   BUTTON RIPPLE  (JS injects .ripple-ink spans)
+   ============================================================ */
+button, a.btn { position: relative; overflow: hidden; }
+.ripple-ink {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(0);
+  animation: rippleAnim 0.6s ease-out forwards;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+@keyframes rippleAnim {
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+/* ============================================================
+   AMBIENT DOTS  (JS injects .aura-ambient/.aura-dot)
+   ============================================================ */
+.aura-ambient {
+  position: fixed; inset: 0;
+  overflow: hidden; pointer-events: none; z-index: 0;
+}
+.aura-dot {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.25);
+  animation: floatY linear infinite;
+}
+/* ease used by grid entrance so content stays above ambient */
+main, header, nav, .aura-ambient + * { position: relative; z-index: 1; }
+
+/* ---------- Filter chips: active state (driven by JS) ---------- */
+[data-filterbar] [data-filter] {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+[data-filterbar] [data-filter][data-active],
+button[data-filter][data-active] {
+  background: var(--primary, #000) !important;
+  color: var(--on-primary, #fff) !important;
+  border-color: var(--primary, #000) !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
+[data-filterbar] [data-filter]:active { transform: scale(0.96); }
+
+/* ============================================================
+   REDUCED MOTION  — accessibility
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .js-reveal { opacity: 1 !important; transform: none !important; }
+}

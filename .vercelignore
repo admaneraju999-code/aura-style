@@ -1,0 +1,13 @@
+# Files not needed on Vercel (dependencies stay defined in package.json)
+node_modules
+.vercel
+.env
+.env.local
+*.log
+.git
+.gitignore
+tests
+scripts/setup-db.js
+scripts/load-env.mjs
+scripts/dev-server.mjs
+README.md
