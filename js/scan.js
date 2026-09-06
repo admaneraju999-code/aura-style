@@ -78,18 +78,18 @@ function close() {
 function showPicker() {
   bodyEl().innerHTML = `
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-      <label class="w-full flex flex-col items-center justify-center gap-2.5 border-2 border-dashed border-outline-variant rounded-xl py-10 cursor-pointer hover:border-primary transition-colors text-center">
+      <div class="relative w-full flex flex-col items-center justify-center gap-2.5 border-2 border-dashed border-outline-variant rounded-xl py-10 cursor-pointer hover:border-primary transition-colors text-center">
         <span class="material-symbols-outlined text-5xl text-on-surface-variant">upload_file</span>
         <span class="font-label-md text-label-md text-primary">Upload photo</span>
         <span class="font-label-sm text-label-sm text-on-surface-variant">JPG, PNG or WebP — up to 8 MB</span>
-        <input id="scan-file" type="file" accept="image/*" class="hidden" />
-      </label>
-      <button id="scan-camera" class="w-full flex-col flex items-center justify-center gap-2.5 border-2 border-dashed border-primary rounded-xl py-10 cursor-pointer hover:bg-primary/5 transition-colors text-center">
+        <input id="scan-file" type="file" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+      </div>
+      <div id="scan-camera" class="relative w-full flex-col flex items-center justify-center gap-2.5 border-2 border-dashed border-primary rounded-xl py-10 cursor-pointer hover:bg-primary/5 transition-colors text-center">
         <span class="material-symbols-outlined text-5xl text-primary">photo_camera</span>
         <span class="font-label-md text-label-md text-primary">Use camera</span>
         <span class="font-label-sm text-label-sm text-on-surface-variant">Take a photo now</span>
-        <input id="scan-camera-file" type="file" accept="image/*" capture="environment" class="hidden" />
-      </button>
+        <input id="scan-camera-file" type="file" accept="image/*" capture="environment" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+      </div>
     </div>
     <p id="scan-drag" class="text-center font-label-sm text-label-sm text-on-surface-variant mt-1">...or drag &amp; drop an image here</p>`;
 
@@ -102,13 +102,9 @@ function showPicker() {
   const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
   if (!isTouch) {
     camera.remove();
-    const fileLabel = document.getElementById("scan-file").parentElement;
-    if (fileLabel) fileLabel.classList.add("sm:col-span-2");
+    const upload = document.getElementById("scan-file").parentElement;
+    if (upload) upload.classList.add("sm:col-span-2");
   } else {
-    camera.addEventListener("click", (e) => {
-      e.preventDefault();
-      cameraFile.click();
-    });
     cameraFile.addEventListener("change", (e) => {
       if (e.target.files && e.target.files[0]) processFile(e.target.files[0]);
     });
